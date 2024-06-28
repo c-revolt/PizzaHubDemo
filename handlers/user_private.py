@@ -3,7 +3,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.utils.formatting import as_list, as_marked_section, Bold
 
 from filters.chat_types import ChatTypeFilter
-from keyboards.reply import keyboards_builder, del_kb
+from keyboards.reply import get_keyboard
 
 user_private_router = Router()
 user_private_router.message.filter(ChatTypeFilter(['private']))
@@ -11,15 +11,23 @@ user_private_router.message.filter(ChatTypeFilter(['private']))
 
 @user_private_router.message(CommandStart())
 async def start_cmd(message: types.Message):
-    await message.answer('Привеееет!', reply_markup=keyboards_builder.as_markup(
-        resize_keyboard=True,
-        input_field_placeholder='Что вас интересует?'))
+    await message.answer(
+        "Привет, я виртуальный помощник",
+        reply_markup=get_keyboard(
+            "Меню",
+            "О магазине",
+            "Варианты оплаты",
+            "Варианты доставки",
+            placeholder="Что вас интересует?",
+            sizes=(2, 2)
+        )
+    )
 
 
 @user_private_router.message((F.text.lower().contains('продукты')) | (F.text.lower() == 'меню'))
 @user_private_router.message(Command('menu'))
 async def menu_cmd(message: types.Message):
-    await message.answer('Вот наше меню:', reply_markup=del_kb)
+    await message.answer('Вот наше меню:')
 
 
 @user_private_router.message(F.text.lower() == 'о нас')
@@ -64,13 +72,13 @@ async def shipping_cmd(message: types.Message):
     await message.answer(text.as_html())
 
 
-@user_private_router.message(F.contact)
-async def get_contact(message: types.Message):
-    await message.answer(f'номер получен')
-    await message.answer(str(message.contact))
-
-
-@user_private_router.message(F.location)
-async def get_location(message: types.Message):
-    await message.answer(f'локация получена')
-    await message.answer(str(message.location))
+# @user_private_router.message(F.contact)
+# async def get_contact(message: types.Message):
+#     await message.answer(f'номер получен')
+#     await message.answer(str(message.contact))
+#
+#
+# @user_private_router.message(F.location)
+# async def get_location(message: types.Message):
+#     await message.answer(f'локация получена')
+#     await message.answer(str(message.location))
