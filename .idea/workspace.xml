@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3758a006-8940-4a36-9d5c-769f389f1c64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/filters/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/filters/chat_types.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handlers/user_group.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keyboards/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/keyboards/reply.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/user_private.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/user_private.py" afterDir="false" />
@@ -41,16 +40,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.app.executor": "Run",
-    "Python.user_private.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feat/stage__2__filters",
-    "last_opened_file_path": "/Users/a.pride/Documents/Development/PizzaHubDemo"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.user_group.executor&quot;: &quot;Run&quot;,
+    &quot;Python.user_private.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/stage__3__keyboard&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/a.pride/Documents/Development/PizzaHubDemo&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
