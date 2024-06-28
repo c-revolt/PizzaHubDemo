@@ -1,44 +1,26 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, KeyboardButtonPollType
+from aiogram.types import KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-start_kb = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text='Меню'),
-            KeyboardButton(text='О Нас'),
-        ],
-        [
-            KeyboardButton(text='Способы Оплаты'),
-            KeyboardButton(text='Варианты доставки')
-        ]
-    ],
-    resize_keyboard=True,
-    input_field_placeholder='Выберите нужное...'
-)
 
-del_kb = ReplyKeyboardRemove()
+def get_keyboard(
+        *btns: str,
+        placeholder: str = None,
+        request_contact: int = None,
+        request_location: int = None,
+        sizes: tuple[int] = (2,),
+):
+    keyboard = ReplyKeyboardBuilder()
 
-main_kb = ReplyKeyboardBuilder()
-main_kb.add(
-    KeyboardButton(text='Меню'),
-    KeyboardButton(text='О Нас'),
-    KeyboardButton(text='Способы Оплаты'),
-    KeyboardButton(text='Варианты доставки')
-)
-main_kb.adjust(2, 2)
+    for index, text in enumerate(btns, start=0):
 
-keyboards_builder = ReplyKeyboardBuilder()
-keyboards_builder.attach(main_kb)
-keyboards_builder.row(KeyboardButton(text='Оставить отзыва'))
+        if request_contact and request_contact == index:
+            keyboard.add(KeyboardButton(text=text, request_contact=True))
 
-request_kb = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text='Создать опрос', request_poll=KeyboardButtonPollType())
-        ],
-        [
-            KeyboardButton(text='Отправить номер', request_contact=True),
-            KeyboardButton(text='Отправить локацию', request_location=True)
-        ]
-    ]
-)
+        elif request_location and request_location == index:
+            keyboard.add(KeyboardButton(text=text, request_location=True))
+        else:
+
+            keyboard.add(KeyboardButton(text=text))
+
+    return keyboard.adjust(*sizes).as_markup(
+        resize_keyboard=True, input_field_placeholder=placeholder)
