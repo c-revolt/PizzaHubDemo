@@ -2,6 +2,9 @@ from aiogram import F, types, Router
 from aiogram.filters import CommandStart, Command
 from aiogram.utils.formatting import as_list, as_marked_section, Bold
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.orm_query import orm_get_products
+
 from filters.chat_types import ChatTypeFilter
 from keyboards.reply import get_keyboard
 
@@ -26,7 +29,14 @@ async def start_cmd(message: types.Message):
 
 @user_private_router.message((F.text.lower().contains('продукты')) | (F.text.lower() == 'меню'))
 @user_private_router.message(Command('menu'))
-async def menu_cmd(message: types.Message):
+async def menu_cmd(message: types.Message, session: AsyncSession):
+    for product in await orm_get_products(session):
+        await message.answer_photo(
+            product.image,
+            caption=f'<strong>{product.name}\
+                    </strong>\n{product.description}\nСтоимость: {round(product.price, 2)}'
+
+        )
     await message.answer('Вот наше меню:')
 
 
